@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TeaApiApplication {
 
 	public static void main(String[] args) {
+		
 		SpringApplication.run(TeaApiApplication.class, args);
+		
 	}
 }
