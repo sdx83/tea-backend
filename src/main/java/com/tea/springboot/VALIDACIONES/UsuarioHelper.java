@@ -45,7 +45,6 @@ public class UsuarioHelper {
 		if( usuario.getPassword().equals(""))
 			throw new ResponseStatusException(HttpStatus.FORBIDDEN,"La password del usuario no puede estar vacía");
 		
-		
 		//Validaciones email
 		if(usuario.getMail().trim().length() > 30)
 			throw new ResponseStatusException(HttpStatus.FORBIDDEN,"El mail del usuario no puede contener más de 30 caracteres");
@@ -63,7 +62,6 @@ public class UsuarioHelper {
 	}
 	
 	public static String convertirFechaAFormatoJapones(Date fecha) {
-		
 		return new SimpleDateFormat("yyyyMMdd").format(fecha);
 	}
 }
