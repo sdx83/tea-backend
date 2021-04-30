@@ -1,4 +1,4 @@
-package com.tea.springboot;
+package com.tea;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TeaApiApplication {
 
 	public static void main(String[] args) {
-		
+
 		SpringApplication.run(TeaApiApplication.class, args);
-		
+
 	}
 }
