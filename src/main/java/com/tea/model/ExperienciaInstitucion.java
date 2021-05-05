@@ -7,9 +7,9 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="calificaciones_institucion")
-@PrimaryKeyJoinColumn(name="id_calificacion")
-public class CalificacionInstitucion extends Calificacion {
+@Table(name="experiencias_institucion")
+@PrimaryKeyJoinColumn(name="id_experiencia")
+public class ExperienciaInstitucion extends Experiencia {
 
 	private static final long serialVersionUID = 7749294115013364086L;
 

@@ -14,16 +14,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="calificaciones")
+@Table(name="experiencias")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Calificacion implements Serializable {
+public abstract class Experiencia implements Serializable {
 
 	private static final long serialVersionUID = -7546542607087285227L;
 
 	@Id
-	@Column(name="id_calificacion")
+	@Column(name="id_experiencia")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idCalificacion;
+	private Long idExperiencia;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_usuario", nullable = false)
@@ -36,12 +36,12 @@ public abstract class Calificacion implements Serializable {
 	@Column(nullable=false)
 	private int puntaje;
 	
-	public Long getIdCalificacion() {
-		return idCalificacion;
+	public Long getIdExperiencia() {
+		return idExperiencia;
 	}
 
-	public void setIdCalificacion(Long idCalificacion) {
-		this.idCalificacion = idCalificacion;
+	public void setIdExperiencia(Long idExperiencia) {
+		this.idExperiencia = idExperiencia;
 	}
 
 
