@@ -1,72 +1,60 @@
 package com.tea.model;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+@Getter
+@Setter
 @Entity
 @Table(name="experiencias")
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Experiencia implements Serializable {
-
-	private static final long serialVersionUID = -7546542607087285227L;
+@NoArgsConstructor
+public class Experiencia {
 
 	@Id
-	@Column(name="id_experiencia")
+	@Column(name = "id_experiencia")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idExperiencia;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_usuario", nullable = false)
-	private Usuario usuario;
-	
-	
-	@Column(nullable=false,length=255)
+	private Long id;
+
+	@Column(nullable = false, length = 30)
+	private String titulo;
+
+	@Column(nullable = false, length = 255)
 	private String comentario;
-	
-	@Column(nullable=false)
+
+	@Column()
 	private int puntaje;
-	
-	public Long getIdExperiencia() {
-		return idExperiencia;
-	}
 
-	public void setIdExperiencia(Long idExperiencia) {
-		this.idExperiencia = idExperiencia;
-	}
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "experiencia", referencedColumnName = "id", nullable = false)
+	@JsonManagedReference
+	private Usuario usuario;
 
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "experiencia", referencedColumnName = "id", nullable = false)
+	@JsonBackReference
+	private Institucion institucion;
 
-	public int getPuntaje() {
-		return puntaje;
-	}
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "experiencia", referencedColumnName = "id", nullable = false)
+	@JsonBackReference
+	private Profesional profesional;
 
-	public void setPuntaje(int puntaje) {
-		this.puntaje = puntaje;
-	}
-	
-	public Usuario getUsuario() {
-		return usuario;
-	}
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "experiencia", referencedColumnName = "id", nullable = false)
+	@JsonBackReference
+	private Actividad actividad;
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	
-	public String getComentario() {
-		return comentario;
-	}
-
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
-	}
-	
 }

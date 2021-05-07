@@ -1,5 +1,6 @@
 package com.tea.model;
 
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,7 @@ import java.util.List;
 @Entity
 @Table(name="instituciones")
 @NoArgsConstructor
-public class Institucion {
+public class Actividad {
 
     @Id
     @Column(name="id_institucion")
@@ -31,20 +32,13 @@ public class Institucion {
     private Long id;
 
     @Column(nullable=false,length=50)
-    private String nombre;
-
-    @Column(nullable=false,length=50)
-    private String direccion;
-
-    @Column(nullable=false,length=50)
-    private String especialidad;
+    private String descripcion;
 
     @Column(nullable=false,length=100)
     private String latitud;
 
     @Column(nullable=false,length=100)
     private String longitud;
-
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "localidad", referencedColumnName = "id")
@@ -54,5 +48,6 @@ public class Institucion {
             cascade = CascadeType.PERSIST)
     @JsonManagedReference
     List<Experiencia> experiencias;
+
 
 }

@@ -1,75 +1,61 @@
 package com.tea.model;
 
-import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.List;
 
+@Getter
+@Setter
 @Entity
-@Table(name="profesionales")
-public class Profesional implements Serializable {
+@Table(name="instituciones")
+@NoArgsConstructor
+public class Profesional {
 
-	private static final long serialVersionUID = -805909798258967477L;
-	
-	@Id
-	@Column(name="id_profesional")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idProfesional;
-	
-	@Column(nullable=false,length=20)
-	private String nombre;
-	
-	@Column(nullable=false,length=20)
-	private String apellido;
-	
-	@Column(nullable=false,length=20)
-	private String especialidad;
-	
-	@Column(nullable=false,length=10)
-	private String matricula;
-	
-	public Long getIdProfesional() {
-		return idProfesional;
-	}
+    @Id
+    @Column(name="id_institucion")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public void setIdProfesional(Long idProfesional) {
-		this.idProfesional = idProfesional;
-	}
+    @Column(nullable=false,length=50)
+    private String nombre;
 
-	public String getNombre() {
-		return nombre;
-	}
+    @Column(nullable=false,length=50)
+    private String apellido;
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    @Column(nullable=false,length=20)
+    private String matricula;
 
-	public String getApellido() {
-		return apellido;
-	}
+    @Column(nullable=false,length=50)
+    private String especialidad;
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
+    @Column(nullable=false,length=100)
+    private String latitud;
 
-	public String getEspecialidad() {
-		return especialidad;
-	}
+    @Column(nullable=false,length=100)
+    private String longitud;
 
-	public void setEspecialidad(String especialidad) {
-		this.especialidad = especialidad;
-	}
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "localidad", referencedColumnName = "id")
+    private Localidad localidad;
 
-	public String getMatricula() {
-		return matricula;
-	}
-
-	public void setMatricula(String matricula) {
-		this.matricula = matricula;
-	}
+    @OneToMany(mappedBy = "experiencia", fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST)
+    @JsonManagedReference
+    List<Experiencia> experiencias;
 
 }
