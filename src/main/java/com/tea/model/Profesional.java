@@ -58,5 +58,4 @@ public class Profesional {
     @JsonManagedReference
     List<Experiencia> experiencias;
 
-
 }

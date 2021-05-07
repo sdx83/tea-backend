@@ -1,7 +1,5 @@
 package com.tea.model;
 
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -56,6 +54,5 @@ public class Institucion {
             cascade = CascadeType.PERSIST)
     @JsonManagedReference
     List<Experiencia> experiencias;
-
 
 }

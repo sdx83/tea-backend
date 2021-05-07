@@ -1,6 +1,5 @@
 package com.tea.model;
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
@@ -24,39 +23,38 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class Experiencia {
 
-    @Id
-    @Column(name="id_experiencia")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@Column(name = "id_experiencia")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(nullable=false,length=30)
-    private String titulo;
+	@Column(nullable = false, length = 30)
+	private String titulo;
 
-    @Column(nullable=false,length=255)
-    private String comentario;
+	@Column(nullable = false, length = 255)
+	private String comentario;
 
-    @Column()
-    private int puntaje;
+	@Column()
+	private int puntaje;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "experiencia", referencedColumnName = "id", nullable = false)
-    @JsonManagedReference
-    private Usuario usuario;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "experiencia", referencedColumnName = "id", nullable = false)
+	@JsonManagedReference
+	private Usuario usuario;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "experiencia", referencedColumnName = "id", nullable = false)
-    @JsonBackReference
-    private Institucion institucion;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "experiencia", referencedColumnName = "id", nullable = false)
+	@JsonBackReference
+	private Institucion institucion;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "experiencia", referencedColumnName = "id", nullable = false)
-    @JsonBackReference
-    private Profesional profesional;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "experiencia", referencedColumnName = "id", nullable = false)
+	@JsonBackReference
+	private Profesional profesional;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "experiencia", referencedColumnName = "id", nullable = false)
-    @JsonBackReference
-    private Actividad actividad;
-
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "experiencia", referencedColumnName = "id", nullable = false)
+	@JsonBackReference
+	private Actividad actividad;
 
 }
