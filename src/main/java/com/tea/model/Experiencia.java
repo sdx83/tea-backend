@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table(name="experiencias")
 public class Experiencia implements Serializable {
@@ -36,22 +34,22 @@ public class Experiencia implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "usuarios", referencedColumnName = "id_usuario", nullable = false)
-	@JsonManagedReference
+	//@JsonManagedReference
 	private Usuario usuario;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "instituciones", referencedColumnName = "id_institucion", nullable = true)
-	@JsonManagedReference
+	//@JsonManagedReference
 	private Institucion institucion;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "profesional", referencedColumnName = "id_profesional", nullable = true)
-	@JsonManagedReference
+	//@JsonManagedReference
 	private Profesional profesional;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "actividades", referencedColumnName = "id_actividad", nullable = true)
-	@JsonManagedReference
+	//@JsonManagedReference
 	private Actividad actividad;
 
 	public Long getId() {
