@@ -23,7 +23,7 @@ public class ActividadServiceImpl implements ActividadService {
 		
 		List<Actividad> actividades = actividadDAO.findAll();
 		
-		//ordeno las categorias alfabeticamente
+		//ordeno las actividades alfabeticamente
  		Comparator<Actividad> comparadorActividades = (Actividad a1, Actividad a2) -> {
  			return (a1.getDescripcion()).compareTo((a2.getDescripcion()));
  		};

@@ -1,5 +1,7 @@
 package com.tea.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,7 +16,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="experiencias")
-public class Experiencia {
+public class Experiencia implements Serializable {
+
+	private static final long serialVersionUID = 4689342591539815009L;
 
 	@Id
 	@Column(name = "id_experiencia")

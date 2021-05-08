@@ -13,13 +13,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name="instituciones")
-public class Institucion {
+public class Institucion implements Serializable {
 
-    @Id
+	private static final long serialVersionUID = -973596195707393069L;
+
+	@Id
     @Column(name="id_institucion")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
