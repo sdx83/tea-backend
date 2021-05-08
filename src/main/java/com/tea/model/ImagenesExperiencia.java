@@ -1,10 +1,5 @@
 package com.tea.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,11 +11,8 @@ import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Getter
-@Setter
 @Entity
 @Table(name="imagenes_experiencias")
-@NoArgsConstructor
 public class ImagenesExperiencia {
 
     @Id
@@ -35,4 +27,28 @@ public class ImagenesExperiencia {
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "experiencia", referencedColumnName = "id")
     private Experiencia experiencia;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
+
+    public Experiencia getExperiencia() {
+        return experiencia;
+    }
+
+    public void setExperiencia(Experiencia experiencia) {
+        this.experiencia = experiencia;
+    }
 }

@@ -2,9 +2,6 @@ package com.tea.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,11 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Getter
-@Setter
 @Entity
 @Table(name="experiencias")
-@NoArgsConstructor
 public class Experiencia {
 
 	@Id
@@ -57,4 +51,67 @@ public class Experiencia {
 	@JsonBackReference
 	private Actividad actividad;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
+	public int getPuntaje() {
+		return puntaje;
+	}
+
+	public void setPuntaje(int puntaje) {
+		this.puntaje = puntaje;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Institucion getInstitucion() {
+		return institucion;
+	}
+
+	public void setInstitucion(Institucion institucion) {
+		this.institucion = institucion;
+	}
+
+	public Profesional getProfesional() {
+		return profesional;
+	}
+
+	public void setProfesional(Profesional profesional) {
+		this.profesional = profesional;
+	}
+
+	public Actividad getActividad() {
+		return actividad;
+	}
+
+	public void setActividad(Actividad actividad) {
+		this.actividad = actividad;
+	}
 }

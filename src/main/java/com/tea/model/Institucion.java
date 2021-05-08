@@ -1,9 +1,6 @@
 package com.tea.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,11 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.List;
 
-@Getter
-@Setter
 @Entity
 @Table(name="instituciones")
-@NoArgsConstructor
 public class Institucion {
 
     @Id
@@ -55,4 +49,67 @@ public class Institucion {
     @JsonManagedReference
     List<Experiencia> experiencias;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
+    }
+
+    public Localidad getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(Localidad localidad) {
+        this.localidad = localidad;
+    }
+
+    public List<Experiencia> getExperiencias() {
+        return experiencias;
+    }
+
+    public void setExperiencias(List<Experiencia> experiencias) {
+        this.experiencias = experiencias;
+    }
 }
