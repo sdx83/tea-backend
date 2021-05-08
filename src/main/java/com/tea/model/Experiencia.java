@@ -1,8 +1,5 @@
 package com.tea.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="experiencias")
@@ -31,24 +30,24 @@ public class Experiencia {
 	@Column()
 	private int puntaje;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "usuarios", referencedColumnName = "id_usuario", nullable = false)
 	@JsonManagedReference
 	private Usuario usuario;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "instituciones", referencedColumnName = "id_institucion", nullable = false)
-	@JsonBackReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "instituciones", referencedColumnName = "id_institucion", nullable = true)
+	@JsonManagedReference
 	private Institucion institucion;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "profesional", referencedColumnName = "id_profesional", nullable = false)
-	@JsonBackReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "profesional", referencedColumnName = "id_profesional", nullable = true)
+	@JsonManagedReference
 	private Profesional profesional;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "actividades", referencedColumnName = "id_actividad", nullable = false)
-	@JsonBackReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "actividades", referencedColumnName = "id_actividad", nullable = true)
+	@JsonManagedReference
 	private Actividad actividad;
 
 	public Long getId() {
