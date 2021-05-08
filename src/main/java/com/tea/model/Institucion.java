@@ -41,10 +41,10 @@ public class Institucion {
 
 
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "localidad", referencedColumnName = "id")
+    @JoinColumn(name = "localidad", referencedColumnName = "id_localidad")
     private Localidad localidad;
 
-    @OneToMany(mappedBy = "experiencia", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "institucion", fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST)
     @JsonManagedReference
     List<Experiencia> experiencias;

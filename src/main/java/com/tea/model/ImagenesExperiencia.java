@@ -25,7 +25,7 @@ public class ImagenesExperiencia {
     private byte[] imagen;
 
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "experiencia", referencedColumnName = "id")
+    @JoinColumn(name = "id_experiencia", referencedColumnName = "id_experiencia")
     private Experiencia experiencia;
 
     public Long getId() {

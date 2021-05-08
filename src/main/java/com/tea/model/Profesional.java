@@ -17,11 +17,11 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name="instituciones")
+@Table(name="profesional")
 public class Profesional {
 
     @Id
-    @Column(name="id_institucion")
+    @Column(name="id_profesional")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -44,10 +44,10 @@ public class Profesional {
     private String longitud;
 
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "localidad", referencedColumnName = "id")
+    @JoinColumn(name = "localidad", referencedColumnName = "id_localidad")
     private Localidad localidad;
 
-    @OneToMany(mappedBy = "experiencia", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "profesional", fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST)
     @JsonManagedReference
     List<Experiencia> experiencias;

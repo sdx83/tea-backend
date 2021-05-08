@@ -32,22 +32,22 @@ public class Experiencia {
 	private int puntaje;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "experiencia", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "usuarios", referencedColumnName = "id_usuario", nullable = false)
 	@JsonManagedReference
 	private Usuario usuario;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "experiencia", referencedColumnName = "id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "instituciones", referencedColumnName = "id_institucion", nullable = false)
 	@JsonBackReference
 	private Institucion institucion;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "experiencia", referencedColumnName = "id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "profesional", referencedColumnName = "id_profesional", nullable = false)
 	@JsonBackReference
 	private Profesional profesional;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "experiencia", referencedColumnName = "id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "actividades", referencedColumnName = "id_actividad", nullable = false)
 	@JsonBackReference
 	private Actividad actividad;
 

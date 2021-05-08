@@ -58,7 +58,7 @@ public class Usuario implements Serializable  {
 	@Column(nullable=true, length=50)
 	private String provincia;
 
-	@OneToMany(mappedBy = "experiencia", fetch = FetchType.LAZY,
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY,
 			cascade = CascadeType.PERSIST)
 	@JsonBackReference
 	List<Experiencia> experiencias;
