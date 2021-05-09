@@ -1,11 +1,7 @@
 package com.tea.controller;
+import java.util.List;
 import java.util.Optional;
 
-import com.tea.model.Usuario;
-import com.tea.service.UsuarioServiceImpl;
-import com.tea.utils.UserEnum;
-import com.tea.utils.UserValidator;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.tea.model.Usuario;
+import com.tea.service.UsuarioServiceImpl;
+import com.tea.utils.UserEnum;
+import com.tea.utils.UserValidator;
+
+import io.swagger.annotations.Api;
 
 
 @RestController
@@ -126,4 +129,23 @@ public class UsuarioController {
 			throw new Exception("Error al eliminar el usuario");
 		}
  	}
+ 	
+	// GET: http://localhost:8080/Usuarios/
+    @GetMapping()
+	public ResponseEntity<List<Usuario>> getAll() throws Exception{
+
+ 		try {
+ 			List<Usuario> usuarios = usuarioService.findAll();
+
+ 			if(usuarios.size() > 0) {
+ 	 			return ResponseEntity.ok(usuarios);
+ 	 		}else {
+ 	 			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No se encontraron usuarios");
+ 	 		}
+ 		} catch (ResponseStatusException e) {
+			throw new Exception(e.getReason());
+		} catch (Exception e) {
+			throw new Exception("Error inesperado");
+		}
+	}
 }

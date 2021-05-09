@@ -1,13 +1,17 @@
 package com.tea.service;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
-import com.tea.model.Usuario;
-import com.tea.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.tea.model.Usuario;
+import com.tea.repository.UserRepository;
 
 @Service
 @Transactional(readOnly = false)
@@ -71,5 +75,20 @@ public class UsuarioServiceImpl implements UsuarioService {
 		Usuario user = userRepository.save(usuario);
 
 		return user;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Usuario> findAll() {
+		
+		List<Usuario> usuarios = userRepository.findAll();
+		
+		//ordeno los usuarios alfabeticamente
+ 		Comparator<Usuario> comparadorUsuarios = (Usuario u1, Usuario u2) -> {
+ 			return (u1.getApellido()).compareTo((u2.getApellido()));
+ 		};
+ 		
+ 		Collections.sort(usuarios, comparadorUsuarios);
+		 
+		return usuarios ;
 	}
 }

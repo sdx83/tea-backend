@@ -1,8 +1,9 @@
 package com.tea.service;
 
-import com.tea.model.Usuario;
-
+import java.util.List;
 import java.util.Optional;
+
+import com.tea.model.Usuario;
 
 public interface UsuarioService {
 
@@ -17,5 +18,7 @@ public interface UsuarioService {
 	public Usuario delete(Usuario usuario);
 
 	public Usuario activate(Usuario usuario);
+	
+	List<Usuario> findAll();
 
 }
