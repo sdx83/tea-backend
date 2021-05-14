@@ -32,4 +32,9 @@ public class InstitucionServiceImpl implements InstitucionService {
 		 
 		return instituciones ;
 	}
+
+	@Override
+	public List<Institucion> findByLocalidadAndPuntajeAndParams(Long localidad, double puntaje, String palabras) {
+		return null;
+	}
 }
