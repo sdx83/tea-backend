@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LocalidadServiceImpl implements LocalidadService{
@@ -20,6 +21,11 @@ public class LocalidadServiceImpl implements LocalidadService{
     @Override
     public List<Localidad> findAll() {
         return localidadRepository.findAll();
+    }
+
+    @Override
+    public Localidad findById(Long id) {
+        return localidadRepository.findById(id).get();
     }
 
 }

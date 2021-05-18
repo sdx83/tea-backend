@@ -3,7 +3,11 @@ package com.tea.service;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
+import com.tea.model.Localidad;
+import com.tea.model.Profesional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,9 +18,13 @@ import com.tea.repository.InstitucionRepository;
 @Service
 @Transactional(readOnly = false)
 public class InstitucionServiceImpl implements InstitucionService {
-	
+
 	@Autowired
 	InstitucionRepository institucionDAO;
+
+	public InstitucionServiceImpl(InstitucionRepository institucionDAO) {
+		this.institucionDAO = institucionDAO;
+	}
 	
 	@Transactional(readOnly = true)
 	public List<Institucion> findAll() {
@@ -33,8 +41,5 @@ public class InstitucionServiceImpl implements InstitucionService {
 		return instituciones ;
 	}
 
-	@Override
-	public List<Institucion> findByLocalidadAndPuntajeAndParams(Long localidad, double puntaje, String palabras) {
-		return null;
-	}
+
 }
