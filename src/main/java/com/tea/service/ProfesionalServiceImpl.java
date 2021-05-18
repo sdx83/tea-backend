@@ -3,7 +3,10 @@ package com.tea.service;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
+import com.tea.model.Localidad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -15,10 +18,14 @@ import com.tea.repository.ProfesionalRepository;
 @Service
 @Transactional(readOnly = false)
 public class ProfesionalServiceImpl implements ProfesionalService {
-	
+
+	private ProfesionalRepository profesionalDAO;
+
 	@Autowired
-	ProfesionalRepository profesionalDAO;
-	
+	public ProfesionalServiceImpl(ProfesionalRepository profesionalDAO) {
+		this.profesionalDAO = profesionalDAO;
+	}
+
 	@Transactional(readOnly = true)
 	public List<Profesional> findAll() {
 		
@@ -34,8 +41,4 @@ public class ProfesionalServiceImpl implements ProfesionalService {
 		return profesionales ;
 	}
 
-	@Override
-	public List<Profesional> findByLocalidadAndPuntajeAndParams(Long localidad, double puntaje, String palabras) {
-		return null;
-	}
 }

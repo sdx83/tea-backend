@@ -37,17 +37,17 @@ public class Profesional implements Serializable {
     @Column(nullable=false,length=100)
     private String longitud;
 
-    @Column(nullable=false,length=50)
+    @Column(length=50)
     private String direccion;
 
-    @Column(nullable=false)
+    @Column()
     private String telefono;
 
-    @Column(nullable=false)
+    @Column()
     private String email;
 
-    @Column(nullable=false)
-    private double valoracionPromedio;
+    @Column
+    private Double valoracionPromedio;
 
     @Column(name = "imagen")
     @Lob
@@ -159,11 +159,11 @@ public class Profesional implements Serializable {
         this.email = email;
     }
 
-    public double getValoracionPromedio() {
+    public Double getValoracionPromedio() {
         return valoracionPromedio;
     }
 
-    public void setValoracionPromedio(double valoracionPromedio) {
+    public void setValoracionPromedio(Double valoracionPromedio) {
         this.valoracionPromedio = valoracionPromedio;
     }
 
