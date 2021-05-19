@@ -46,12 +46,17 @@ public class Profesional implements Serializable {
     @Column()
     private String email;
 
+    @Column()
+    private String piso;
+
+    @Column()
+    private String entidad;
+
     @Column(nullable=false)
     private Double valoracionPromedio;
 
     @Column(name = "imagen")
-    @Lob
-    private byte[] imagen;
+    private String imagen;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "localidad", referencedColumnName = "id_localidad")
@@ -167,11 +172,27 @@ public class Profesional implements Serializable {
         this.valoracionPromedio = valoracionPromedio;
     }
 
-    public byte[] getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(byte[] imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public String getPiso() {
+        return piso;
+    }
+
+    public void setPiso(String piso) {
+        this.piso = piso;
+    }
+
+    public String getEntidad() {
+        return entidad;
+    }
+
+    public void setEntidad(String entidad) {
+        this.entidad = entidad;
     }
 }
