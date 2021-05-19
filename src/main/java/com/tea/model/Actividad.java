@@ -38,6 +38,12 @@ public class Actividad implements Serializable {
     @Column(nullable=false,length=100)
     private String longitud;
 
+    @Column()
+    private String entidad;
+
+    @Column(name = "imagen")
+    private String imagen;
+
     @Column(nullable=false)
     private Double valoracionPromedio;
 
@@ -106,5 +112,21 @@ public class Actividad implements Serializable {
 
     public void setValoracionPromedio(Double valoracionPromedio) {
         this.valoracionPromedio = valoracionPromedio;
+    }
+
+    public String getEntidad() {
+        return entidad;
+    }
+
+    public void setEntidad(String entidad) {
+        this.entidad = entidad;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }
