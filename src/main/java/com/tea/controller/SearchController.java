@@ -1,5 +1,8 @@
 package com.tea.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 import com.tea.model.Actividad;
 import com.tea.model.Institucion;
 import com.tea.model.Profesional;
@@ -7,6 +10,7 @@ import com.tea.service.ActividadService;
 import com.tea.service.InstitucionService;
 import com.tea.service.ProfesionalService;
 import io.swagger.annotations.Api;
+import io.swagger.v3.core.util.Json;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +37,7 @@ public class SearchController {
     }
 
     @GetMapping(value = "/{tipo}")
-    public ResponseEntity<?> getUsuarioByUserAndPass(@PathVariable("tipo") Optional<String> tipoOptional) throws Exception {
+    public ResponseEntity<?> getResultsByType(@PathVariable("tipo") Optional<String> tipoOptional) throws Exception {
         String tipo = null;
         if (tipoOptional.isPresent()) {
             tipo = tipoOptional.get();
@@ -48,6 +52,19 @@ public class SearchController {
         if(tipo.equals("Actividad")){
             return new ResponseEntity<List<Actividad>>(this.actividadService.findAll(), HttpStatus.OK);
         }
-        return null;
+        throw new Exception("No es una busqueda valida");
+    }
+
+    @GetMapping(value = "/top6")
+    public String getTop6() throws Exception {
+        List<Profesional> profesionales = this.profesionalService.findAllOrderByValoracionPromedio();
+        List<Institucion> instituciones = this.institucionService.findAllOrderByValoracionPromedio();
+        List<Actividad> actividades = this.actividadService.findAllOrderByValoracionPromedio();
+        Gson gson = new Gson();
+        String data =  gson.toJson(profesionales.subList(0, 2));
+        JsonArray result = new JsonParser().parse(data).getAsJsonArray();
+        result.addAll(new JsonParser().parse(gson.toJson(instituciones.subList(0, 2))).getAsJsonArray());
+        result.addAll(new JsonParser().parse(gson.toJson(actividades.subList(0, 2))).getAsJsonArray());
+        return result.toString();
     }
 }

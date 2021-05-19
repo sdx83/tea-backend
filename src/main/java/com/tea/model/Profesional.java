@@ -46,7 +46,7 @@ public class Profesional implements Serializable {
     @Column()
     private String email;
 
-    @Column
+    @Column(nullable=false)
     private Double valoracionPromedio;
 
     @Column(name = "imagen")

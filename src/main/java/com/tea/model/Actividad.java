@@ -38,6 +38,9 @@ public class Actividad implements Serializable {
     @Column(nullable=false,length=100)
     private String longitud;
 
+    @Column(nullable=false)
+    private Double valoracionPromedio;
+
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "localidad", referencedColumnName = "id_localidad")
     private Localidad localidad;
@@ -95,5 +98,13 @@ public class Actividad implements Serializable {
 
     public void setExperiencias(List<Experiencia> experiencias) {
         this.experiencias = experiencias;
+    }
+
+    public Double getValoracionPromedio() {
+        return valoracionPromedio;
+    }
+
+    public void setValoracionPromedio(Double valoracionPromedio) {
+        this.valoracionPromedio = valoracionPromedio;
     }
 }

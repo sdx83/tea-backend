@@ -1,19 +1,14 @@
 package com.tea.service;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import com.tea.model.Localidad;
-import com.tea.model.Profesional;
+import com.tea.model.Institucion;
+import com.tea.repository.InstitucionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tea.model.Institucion;
-import com.tea.repository.InstitucionRepository;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 @Service
 @Transactional(readOnly = false)
@@ -38,6 +33,16 @@ public class InstitucionServiceImpl implements InstitucionService {
  		
  		Collections.sort(instituciones, comparadorInstituciones);
 		 
+		return instituciones ;
+	}
+
+	@Override
+	public List<Institucion> findAllOrderByValoracionPromedio() {
+		List<Institucion> instituciones = institucionDAO.findAll();
+
+		instituciones.sort(Comparator.comparingDouble(Institucion::getValoracionPromedio)
+				.reversed());
+
 		return instituciones ;
 	}
 
