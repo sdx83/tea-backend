@@ -33,7 +33,7 @@ public class SearchController {
     }
 
     @GetMapping(value = "/{tipo}")
-    public ResponseEntity<?> getUsuarioByUserAndPass(@PathVariable("tipo") Optional<String> tipoOptional) throws Exception {
+    public ResponseEntity<?> getResultsByType(@PathVariable("tipo") Optional<String> tipoOptional) throws Exception {
         String tipo = null;
         if (tipoOptional.isPresent()) {
             tipo = tipoOptional.get();
@@ -48,6 +48,14 @@ public class SearchController {
         if(tipo.equals("Actividad")){
             return new ResponseEntity<List<Actividad>>(this.actividadService.findAll(), HttpStatus.OK);
         }
+        throw new Exception("No es una busqueda valida");
+    }
+
+    @GetMapping(value = "/top6")
+    public String getTop6() throws Exception {
+        List<Profesional> profesionales = this.profesionalService.findAllOrderByValoracionPromedio();
+        List<Institucion> instituciones = this.institucionService.findAllOrderByValoracionPromedio();
+        List<Actividad> actividades = this.actividadService.findAllOrderByValoracionPromedio();
         return null;
     }
 }

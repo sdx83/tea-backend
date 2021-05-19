@@ -1,19 +1,14 @@
 package com.tea.service;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import com.tea.model.Localidad;
+import com.tea.model.Profesional;
+import com.tea.repository.ProfesionalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tea.model.Profesional;
-import com.tea.repository.ProfesionalRepository;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 @Service
 @Transactional(readOnly = false)
@@ -41,4 +36,14 @@ public class ProfesionalServiceImpl implements ProfesionalService {
 		return profesionales ;
 	}
 
+	@Transactional(readOnly = true)
+	public List<Profesional> findAllOrderByValoracionPromedio() {
+
+		List<Profesional> profesionales = profesionalDAO.findAll();
+
+		profesionales.sort(Comparator.comparingDouble(Profesional::getValoracionPromedio)
+				.reversed());
+
+		return profesionales ;
+	}
 }

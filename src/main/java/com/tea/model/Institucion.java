@@ -43,6 +43,8 @@ public class Institucion implements Serializable {
     @Column(nullable=false,length=100)
     private String longitud;
 
+    @Column
+    private Double valoracionPromedio;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "localidad", referencedColumnName = "id_localidad")
@@ -116,5 +118,13 @@ public class Institucion implements Serializable {
 
     public void setExperiencias(List<Experiencia> experiencias) {
         this.experiencias = experiencias;
+    }
+
+    public Double getValoracionPromedio() {
+        return valoracionPromedio;
+    }
+
+    public void setValoracionPromedio(Double valoracionPromedio) {
+        this.valoracionPromedio = valoracionPromedio;
     }
 }

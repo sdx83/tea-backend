@@ -10,4 +10,6 @@ public interface ProfesionalService {
 
 	List<Profesional> findAll();
 
+	List<Profesional> findAllOrderByValoracionPromedio();
+
 }
