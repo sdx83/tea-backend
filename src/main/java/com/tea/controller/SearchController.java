@@ -1,5 +1,8 @@
 package com.tea.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 import com.tea.model.Actividad;
 import com.tea.model.Institucion;
 import com.tea.model.Profesional;
@@ -7,6 +10,7 @@ import com.tea.service.ActividadService;
 import com.tea.service.InstitucionService;
 import com.tea.service.ProfesionalService;
 import io.swagger.annotations.Api;
+import io.swagger.v3.core.util.Json;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,6 +60,11 @@ public class SearchController {
         List<Profesional> profesionales = this.profesionalService.findAllOrderByValoracionPromedio();
         List<Institucion> instituciones = this.institucionService.findAllOrderByValoracionPromedio();
         List<Actividad> actividades = this.actividadService.findAllOrderByValoracionPromedio();
-        return null;
+        Gson gson = new Gson();
+        String data =  gson.toJson(profesionales.subList(0, 2));
+        JsonArray result = new JsonParser().parse(data).getAsJsonArray();
+        result.addAll(new JsonParser().parse(gson.toJson(instituciones.subList(0, 2))).getAsJsonArray());
+        result.addAll(new JsonParser().parse(gson.toJson(actividades.subList(0, 2))).getAsJsonArray());
+        return result.toString();
     }
 }
