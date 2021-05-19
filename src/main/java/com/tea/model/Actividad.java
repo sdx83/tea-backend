@@ -38,7 +38,7 @@ public class Actividad implements Serializable {
     @Column(nullable=false,length=100)
     private String longitud;
 
-    @Column
+    @Column(nullable=false)
     private Double valoracionPromedio;
 
     @OneToOne(cascade = CascadeType.PERSIST)
