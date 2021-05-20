@@ -106,7 +106,7 @@ public class ExperienciaController {
  			Optional<Experiencia> experiencia;
  			experiencia = experienciaService.findById(idExperiencia);
  			
- 			if (experiencia.isEmpty()) {
+ 			if (!experiencia.isPresent()) {
  				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No se encontraró la experiencia"); 
  			}
  				
