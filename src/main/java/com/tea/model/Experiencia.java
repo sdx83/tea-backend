@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="experiencias")
@@ -31,6 +32,12 @@ public class Experiencia implements Serializable {
 
 	@Column()
 	private int puntaje;
+	
+	@Transient
+	private String tipoExperiencia;
+	
+	@Transient
+	private Object detalleTipoExperiencia;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "usuarios", referencedColumnName = "id_usuario", nullable = false)
@@ -115,4 +122,31 @@ public class Experiencia implements Serializable {
 	public void setActividad(Actividad actividad) {
 		this.actividad = actividad;
 	}
+	
+	public String getTipoExperiencia() {
+		
+		String tipoExp = "";
+		if (this.getActividad() != null)
+			tipoExp = "Actividad";
+		if (this.getProfesional() != null)
+			tipoExp =  "Profesional";
+		if (this.getInstitucion() != null)
+			tipoExp = "Institucion";
+		
+		return tipoExp;
+	}
+	
+	public Object getdetalleTipoExperiencia() {
+		Object salida = "";
+		
+		if (this.getActividad() != null)
+			salida = this.getActividad();
+		if (this.getProfesional() != null)
+			salida =  this.getProfesional();
+		if (this.getInstitucion() != null)
+			salida = this.getInstitucion();
+		
+		return salida;
+	}
+
 }
