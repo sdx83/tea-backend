@@ -20,12 +20,12 @@ public class ImagenesExperiencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "imagen")
+    @Column(name = "imagen",nullable = false)
     @Lob
     private byte[] imagen;
 
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id_experiencia", referencedColumnName = "id_experiencia")
+    @JoinColumn(name = "id_experiencia", referencedColumnName = "id_experiencia",nullable = false)
     private Experiencia experiencia;
 
     public Long getId() {
