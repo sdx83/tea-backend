@@ -1,12 +1,11 @@
 package com.tea.model;
 
 
-import java.io.Serializable;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="profesional")
@@ -64,8 +63,7 @@ public class Profesional implements Serializable {
 
     @OneToMany(mappedBy = "profesional", fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST)
-    //@JsonManagedReference
-    @JsonIgnore
+    @JsonManagedReference
     List<Experiencia> experiencias;
 
     public Long getId() {

@@ -1,5 +1,8 @@
 package com.tea.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -44,19 +47,19 @@ public class Experiencia implements Serializable {
 	//@JsonManagedReference
 	private Usuario usuario;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "instituciones", referencedColumnName = "id_institucion", nullable = true)
-	//@JsonManagedReference
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "institucion", referencedColumnName = "id_institucion", nullable = true)
+	@JsonBackReference
 	private Institucion institucion;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "profesional", referencedColumnName = "id_profesional", nullable = true)
-	//@JsonManagedReference
+	@JsonBackReference
 	private Profesional profesional;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "actividades", referencedColumnName = "id_actividad", nullable = true)
-	//@JsonManagedReference
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "actividad", referencedColumnName = "id_actividad", nullable = true)
+	@JsonBackReference
 	private Actividad actividad;
 
 	public Long getId() {

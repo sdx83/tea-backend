@@ -1,22 +1,12 @@
 package com.tea.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="actividades")
@@ -51,11 +41,8 @@ public class Actividad implements Serializable {
     @JoinColumn(name = "localidad", referencedColumnName = "id_localidad")
     private Localidad localidad;
 
-    @OneToMany(mappedBy = "actividad", fetch = FetchType.LAZY,
-            cascade = CascadeType.PERSIST)
-    
-    //@JsonManagedReference
-    @JsonIgnore
+    @OneToMany(mappedBy = "actividad", fetch = FetchType.LAZY)
+    @JsonManagedReference
     List<Experiencia> experiencias;
 
     public Long getId() {
