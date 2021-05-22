@@ -146,3 +146,8 @@ target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/
 src/main/resources/application.properties
 target/tea-api-0.0.1-SNAPSHOT.jar
 target/tea-api-0.0.1-SNAPSHOT.jar.original
+.idea/misc.xml
+src/main/resources/application.properties
+target/tea-api-0.0.1-SNAPSHOT.jar
+target/tea-api-0.0.1-SNAPSHOT.jar.original
+tea-api.iml
