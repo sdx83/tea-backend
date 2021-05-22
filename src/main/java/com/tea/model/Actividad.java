@@ -1,7 +1,6 @@
 package com.tea.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -18,6 +17,9 @@ public class Actividad implements Serializable {
     @Column(name="id_actividad")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length=50)
+    private String nombre;
 
     @Column(nullable=false,length=50)
     private String descripcion;
@@ -36,6 +38,12 @@ public class Actividad implements Serializable {
 
     @Column(nullable=false)
     private Double valoracionPromedio;
+
+    @Column(length=50)
+    private String direccion;
+
+    @Column(nullable=false,length=150)
+    private String especialidad;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "localidad", referencedColumnName = "id_localidad")
@@ -115,5 +123,29 @@ public class Actividad implements Serializable {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
     }
 }
