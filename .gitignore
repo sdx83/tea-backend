@@ -151,3 +151,5 @@ src/main/resources/application.properties
 target/tea-api-0.0.1-SNAPSHOT.jar
 target/tea-api-0.0.1-SNAPSHOT.jar.original
 tea-api.iml
+tea-api.iml
+src/main/resources/application.properties
