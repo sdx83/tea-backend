@@ -63,9 +63,8 @@ public class ExperienciaController {
 
     
   	// POST: http://localhost:8080/Experiencias
- 	@PostMapping
+ 	@PostMapping()
  	public ResponseEntity<Experiencia> saveExperiencia(@RequestBody Experiencia exp) throws Exception {
- 					
  	try {
  			return ResponseEntity.ok(experienciaService.save(exp));
  		} catch (ResponseStatusException e) {

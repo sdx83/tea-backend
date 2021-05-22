@@ -49,17 +49,17 @@ public class Experiencia implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "institucion", referencedColumnName = "id_institucion", nullable = true)
-	@JsonBackReference
+	@JsonBackReference(value="institucion")
 	private Institucion institucion;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "profesional", referencedColumnName = "id_profesional", nullable = true)
-	@JsonBackReference
+	@JsonBackReference(value="profesional")
 	private Profesional profesional;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "actividad", referencedColumnName = "id_actividad", nullable = true)
-	@JsonBackReference
+	@JsonBackReference(value="actividad")
 	private Actividad actividad;
 
 	public Long getId() {

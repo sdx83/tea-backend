@@ -42,7 +42,7 @@ public class Actividad implements Serializable {
     private Localidad localidad;
 
     @OneToMany(mappedBy = "actividad", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonManagedReference(value="actividad")
     List<Experiencia> experiencias;
 
     public Long getId() {

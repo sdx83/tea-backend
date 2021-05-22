@@ -47,7 +47,7 @@ public class Institucion implements Serializable {
 
     @OneToMany(mappedBy = "institucion", fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST)
-    @JsonManagedReference
+    @JsonManagedReference(value="institucion")
     List<Experiencia> experiencias;
 
     public Long getId() {

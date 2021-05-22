@@ -63,7 +63,7 @@ public class Profesional implements Serializable {
 
     @OneToMany(mappedBy = "profesional", fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST)
-    @JsonManagedReference
+    @JsonManagedReference(value="profesional")
     List<Experiencia> experiencias;
 
     public Long getId() {
