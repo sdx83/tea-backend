@@ -1,7 +1,10 @@
 package com.tea.service;
 
 import com.tea.model.Institucion;
+import com.tea.model.InstructivoInstitucion;
 import com.tea.repository.InstitucionRepository;
+import com.tea.repository.InstructivoInstitucionRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = false)
@@ -16,6 +20,9 @@ public class InstitucionServiceImpl implements InstitucionService {
 
 	@Autowired
 	InstitucionRepository institucionDAO;
+	
+	@Autowired
+	InstructivoInstitucionRepository instructivoInstitucionDAO;
 
 	public InstitucionServiceImpl(InstitucionRepository institucionDAO) {
 		this.institucionDAO = institucionDAO;
@@ -45,6 +52,18 @@ public class InstitucionServiceImpl implements InstitucionService {
 
 		return instituciones ;
 	}
+	
+	@Override
+	public List<InstructivoInstitucion> findInstructivo(Institucion institucion) {
+		List<InstructivoInstitucion> instructivos = instructivoInstitucionDAO.findByInstitucion(institucion);
 
+		return instructivos;
+	}
+
+	@Transactional(readOnly = true)
+	public Optional<Institucion> findById(Long id) {
+		Optional<Institucion> institucion = institucionDAO.findById(id);
+		return institucion;
+	}
 
 }

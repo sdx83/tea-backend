@@ -7,8 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="instructivo_profesionales")
@@ -22,13 +24,17 @@ public class InstructivoProfesional {
 	@Column(nullable=false,length=15)
 	private String tituloEscena;
 	
-	@Column(nullable=false,length=50)
+	@Column(nullable=false,length=255)
 	private String descripcion;
 	
 	@Column(nullable=false,length=255)
 	private String imagen;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@Column(nullable=false)
+	private int orden;
+	
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_profesional", referencedColumnName = "id_profesional",nullable = false)
     private Profesional profesional;
     
@@ -70,5 +76,13 @@ public class InstructivoProfesional {
 
 	public void setProfesional(Profesional profesional) {
 		this.profesional = profesional;
+	}
+	
+	public int getOrden() {
+		return orden;
+	}
+
+	public void setOrden(int orden) {
+		this.orden = orden;
 	}
 }
