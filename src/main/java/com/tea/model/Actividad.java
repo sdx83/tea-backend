@@ -42,6 +42,12 @@ public class Actividad implements Serializable {
     @Column(length=50)
     private String direccion;
 
+    @Column()
+    private String telefono;
+
+    @Column()
+    private String email;
+
     @Column(nullable=false,length=150)
     private String especialidad;
 
@@ -147,5 +153,21 @@ public class Actividad implements Serializable {
 
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

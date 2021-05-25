@@ -26,6 +26,12 @@ public class Institucion implements Serializable {
     @Column(nullable=false,length=50)
     private String especialidad;
 
+    @Column()
+    private String telefono;
+
+    @Column()
+    private String email;
+
     @Column(nullable=false,length=100)
     private String latitud;
 
