@@ -143,4 +143,20 @@ public class Institucion implements Serializable {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
