@@ -38,9 +38,6 @@ public class Experiencia implements Serializable {
 	
 	@Transient
 	private String tipoExperiencia;
-	
-	@Transient
-	private Object detalleTipoExperiencia;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "usuarios", referencedColumnName = "id_usuario", nullable = false)
@@ -137,19 +134,6 @@ public class Experiencia implements Serializable {
 			tipoExp = "Institucion";
 		
 		return tipoExp;
-	}
-	
-	public Object getdetalleTipoExperiencia() {
-		Object salida = "";
-		
-		if (this.getActividad() != null)
-			salida = this.getActividad();
-		if (this.getProfesional() != null)
-			salida =  this.getProfesional();
-		if (this.getInstitucion() != null)
-			salida = this.getInstitucion();
-		
-		return salida;
 	}
 
 }
