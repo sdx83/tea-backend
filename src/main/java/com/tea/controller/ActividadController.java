@@ -1,22 +1,18 @@
 package com.tea.controller;
-import java.util.List;
-import java.util.Optional;
 
+import com.tea.model.Actividad;
+import com.tea.model.Experiencia;
+import com.tea.model.InstructivoActividad;
+import com.tea.service.ActividadServiceImpl;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.tea.model.Actividad;
-import com.tea.model.InstructivoActividad;
-import com.tea.service.ActividadServiceImpl;
-
-import io.swagger.annotations.Api;
+import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -77,4 +73,29 @@ public class ActividadController {
 			throw new Exception("Error inesperado");
 		}
 	}
+
+	@GetMapping("/experiencias/{idActividad}")
+	public ResponseEntity<List<Experiencia>> getExperienciasByInstitucion
+			(@PathVariable("idActividad") long idActividad) throws Exception{
+
+		try {
+
+			Optional<Actividad> actividad = actividadService.findById(idActividad);
+
+			if(!actividad.isPresent()) {
+				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No se encontró la actividad");
+			}
+
+			if(actividad.get().getExperiencias().size() > 0) {
+				return ResponseEntity.ok(actividad.get().getExperiencias());
+			}else {
+				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No se encontraron experiencias");
+			}
+		} catch (ResponseStatusException e) {
+			throw new Exception(e.getReason());
+		} catch (Exception e) {
+			throw new Exception("Error inesperado");
+		}
+	}
+
 }

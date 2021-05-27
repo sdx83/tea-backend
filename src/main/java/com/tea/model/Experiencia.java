@@ -40,7 +40,7 @@ public class Experiencia implements Serializable {
 	private String tipoExperiencia;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "usuarios", referencedColumnName = "id_usuario", nullable = false)
+	@JoinColumn(name = "usuario", referencedColumnName = "id_usuario", nullable = false)
 	//@JsonManagedReference
 	private Usuario usuario;
 

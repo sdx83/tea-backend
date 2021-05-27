@@ -2,6 +2,7 @@ package com.tea.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.tea.model.Experiencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -72,6 +73,30 @@ public class InstitucionController {
  	 			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No se encontraron instructivos");
  	 		}
  		} catch (ResponseStatusException e) {
+			throw new Exception(e.getReason());
+		} catch (Exception e) {
+			throw new Exception("Error inesperado");
+		}
+	}
+
+	@GetMapping("/experiencias/{idInstitucion}")
+	public ResponseEntity<List<Experiencia>> getExperienciasByInstitucion
+			(@PathVariable("idInstitucion") long idInstitucion) throws Exception{
+
+		try {
+
+			Optional<Institucion> institucion = institucionService.findById(idInstitucion);
+
+			if(!institucion.isPresent()) {
+				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No se encontró la institución");
+			}
+
+			if(institucion.get().getExperiencias().size() > 0) {
+				return ResponseEntity.ok(institucion.get().getExperiencias());
+			}else {
+				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No se encontraron experiencias");
+			}
+		} catch (ResponseStatusException e) {
 			throw new Exception(e.getReason());
 		} catch (Exception e) {
 			throw new Exception("Error inesperado");
