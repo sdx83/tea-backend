@@ -74,6 +74,24 @@ public class ActividadController {
 		}
 	}
 
+	@GetMapping("/{idActividad}")
+	public ResponseEntity<Actividad> getActividadById
+			(@PathVariable("idActividad") long idActividad) throws Exception{
+		try {
+			Optional<Actividad> actividad = actividadService.findById(idActividad);
+
+			if(!actividad.isPresent()) {
+				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No se encontró la actividad");
+			}
+
+			return ResponseEntity.ok(actividad.get());
+		} catch (ResponseStatusException e) {
+			throw new Exception(e.getReason());
+		} catch (Exception e) {
+			throw new Exception("Error inesperado");
+		}
+	}
+
 	@GetMapping("/experiencias/{idActividad}")
 	public ResponseEntity<List<Experiencia>> getExperienciasByInstitucion
 			(@PathVariable("idActividad") long idActividad) throws Exception{

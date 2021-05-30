@@ -1,6 +1,7 @@
 package com.tea.controller;
 
 import com.tea.model.Experiencia;
+import com.tea.model.Institucion;
 import com.tea.model.InstructivoProfesional;
 import com.tea.model.Profesional;
 import com.tea.service.ProfesionalServiceImpl;
@@ -68,6 +69,24 @@ public class ProfesionalController {
  	 			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No se encontraron instructivos");
  	 		}
  		} catch (ResponseStatusException e) {
+			throw new Exception(e.getReason());
+		} catch (Exception e) {
+			throw new Exception("Error inesperado");
+		}
+	}
+
+	@GetMapping("/{idProfesional}")
+	public ResponseEntity<Profesional> getActividadById
+			(@PathVariable("idProfesional") long idProfesional) throws Exception{
+		try {
+			Optional<Profesional> profesional = profesionalService.findById(idProfesional);
+
+			if(!profesional.isPresent()) {
+				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No se encontró la actividad");
+			}
+
+			return ResponseEntity.ok(profesional.get());
+		} catch (ResponseStatusException e) {
 			throw new Exception(e.getReason());
 		} catch (Exception e) {
 			throw new Exception("Error inesperado");

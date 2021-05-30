@@ -2,6 +2,7 @@ package com.tea.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.tea.model.Actividad;
 import com.tea.model.Experiencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -73,6 +74,24 @@ public class InstitucionController {
  	 			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No se encontraron instructivos");
  	 		}
  		} catch (ResponseStatusException e) {
+			throw new Exception(e.getReason());
+		} catch (Exception e) {
+			throw new Exception("Error inesperado");
+		}
+	}
+
+	@GetMapping("/{idInstitucion}")
+	public ResponseEntity<Institucion> getActividadById
+			(@PathVariable("idInstitucion") long idInstitucion) throws Exception{
+		try {
+			Optional<Institucion> institucion = institucionService.findById(idInstitucion);
+
+			if(!institucion.isPresent()) {
+				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No se encontró la actividad");
+			}
+
+			return ResponseEntity.ok(institucion.get());
+		} catch (ResponseStatusException e) {
 			throw new Exception(e.getReason());
 		} catch (Exception e) {
 			throw new Exception("Error inesperado");
