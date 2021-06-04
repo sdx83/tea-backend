@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,12 +46,7 @@ public class ProfesionalServiceImpl implements ProfesionalService {
 
 	@Transactional(readOnly = true)
 	public List<Profesional> findAllOrderByValoracionPromedio() {
-
-		List<Profesional> profesionales = profesionalDAO.findAll();
-
-		profesionales.sort(Comparator.comparingDouble(Profesional::getValoracionPromedio)
-				.reversed());
-
+		List<Profesional> profesionales = profesionalDAO.findAll(this.sortByValoracionDesc());
 		return profesionales ;
 	}
 	
@@ -66,4 +62,9 @@ public class ProfesionalServiceImpl implements ProfesionalService {
 		Optional<Profesional> profesional = profesionalDAO.findById(id);
 		return profesional;
 	}
+
+	private Sort sortByValoracionDesc() {
+		return Sort.by(Sort.Direction.DESC, "valoracionPromedio");
+	}
+
 }

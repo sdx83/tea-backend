@@ -82,7 +82,7 @@ public class ProfesionalController {
 			Optional<Profesional> profesional = profesionalService.findById(idProfesional);
 
 			if(!profesional.isPresent()) {
-				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No se encontró la actividad");
+				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No se encontró al Profesional");
 			}
 
 			return ResponseEntity.ok(profesional.get());
