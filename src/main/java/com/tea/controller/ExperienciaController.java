@@ -92,8 +92,8 @@ public class ExperienciaController {
  	 		}
  		} catch (ResponseStatusException e) {
 			throw new Exception(e.getReason());
-		} catch (Exception e) {
-			throw new Exception("Error inesperado");
+		} catch (Exception ex) {
+			throw new Exception(ex.getCause().getMessage());
 		}
  	}
  	
