@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name="profesional")
-public class Profesional implements Serializable {
+public class Profesional implements Entidad,Serializable {
 
 	private static final long serialVersionUID = -8927265276161441192L;
 

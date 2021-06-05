@@ -1,6 +1,5 @@
 package com.tea.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -9,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name="instituciones")
-public class Institucion implements Serializable {
+public class Institucion implements Entidad,Serializable {
 
 	private static final long serialVersionUID = -973596195707393069L;
 
