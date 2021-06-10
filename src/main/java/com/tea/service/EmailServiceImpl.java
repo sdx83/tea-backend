@@ -8,6 +8,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.tea.utils.ActividadMailHelper;
+import com.tea.utils.InstitucionMailHelper;
 import com.tea.utils.ProfesionalMailHelper;
 
 @Service
@@ -75,5 +77,45 @@ public class EmailServiceImpl implements EmailService{
     					 "Mail generado automáticamente. El equipo de TEAyuda.";
     					 
     	this.sendOnly("appteayuda@gmail.com", "Solicitud de alta de Profesional", mensaje, new Date());
+    }
+    
+    public void armarMailInstitucion(InstitucionMailHelper institucion) {
+    	
+    	String mensaje = "A continuación se detallan los datos de la institución cargados por el solicitante para dar " +
+    	                 "de alta en el sistema:\n\n" + 
+    					 "Solicitante: " +  institucion.getApellidoSolicitante() + ", " + institucion.getNombreSolicitante() + "\n" +  
+    					 "Mail Solicitante: " + institucion.getMailSolicitante() + "\n" +
+    					 "Tel Solicitante: " + institucion.getTelefonoSolicitante() + "\n" +  
+    					 "Nombre: " + institucion.getNombre() + "\n" +
+    					 "Descripción: " + institucion.getDescripcion() + "\n" +
+    					 "Especialidad: " + institucion.getEspecialidad() + "\n" +
+    					 "Dirección: " + institucion.getDireccion() + "\n" +
+    					 "Localidad: " + institucion.getLocalidad() + "\n" +
+    					 "Teléfono: " + institucion.getTelefono() + "\n" +
+    					 "Mail: " + institucion.getMail() + "\n" +
+    					 "Observaciones: " + institucion.getObservaciones() + "\n\n\n" +
+    					 "Mail generado automáticamente. El equipo de TEAyuda.";
+    					 
+    	this.sendOnly("appteayuda@gmail.com", "Solicitud de alta de Institución", mensaje, new Date());
+    }
+    
+    public void armarMailActividad(ActividadMailHelper actividad) {
+    	
+    	String mensaje = "A continuación se detallan los datos de la actividad cargados por el solicitante para dar " +
+    	                 "de alta en el sistema:\n\n" + 
+    					 "Solicitante: " +  actividad.getApellidoSolicitante() + ", " + actividad.getNombreSolicitante() + "\n" +  
+    					 "Mail Solicitante: " + actividad.getMailSolicitante() + "\n" +
+    					 "Tel Solicitante: " + actividad.getTelefonoSolicitante() + "\n" +  
+    					 "Nombre: " + actividad.getNombre() + "\n" +
+    					 "Descripción: " + actividad.getDescripcion() + "\n" +
+    					 "Especialidad: " + actividad.getEspecialidad() + "\n" +
+    					 "Dirección: " + actividad.getDireccion() + "\n" +
+    					 "Localidad: " + actividad.getLocalidad() + "\n" +
+    					 "Teléfono: " + actividad.getTelefono() + "\n" +
+    					 "Mail: " + actividad.getMail() + "\n" +
+    					 "Observaciones: " + actividad.getObservaciones() + "\n\n\n" +
+    					 "Mail generado automáticamente. El equipo de TEAyuda.";
+    					 
+    	this.sendOnly("appteayuda@gmail.com", "Solicitud de alta de Actividad", mensaje, new Date());
     }
 }

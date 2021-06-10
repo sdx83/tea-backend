@@ -4,6 +4,10 @@ import com.tea.model.Actividad;
 import com.tea.model.Experiencia;
 import com.tea.model.InstructivoActividad;
 import com.tea.service.ActividadServiceImpl;
+import com.tea.service.EmailServiceImpl;
+import com.tea.utils.ActividadMailHelper;
+import com.tea.utils.InstitucionMailHelper;
+
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,9 +27,12 @@ public class ActividadController {
 
     private final ActividadServiceImpl actividadService;
 
+    private final EmailServiceImpl mailService;
+    
     @Autowired
-	public ActividadController(ActividadServiceImpl actividadService) {
+	public ActividadController(ActividadServiceImpl actividadService, EmailServiceImpl mailService) {
 		this.actividadService = actividadService;
+		this.mailService = mailService;
 	}
 
 	// GET: http://localhost:8080/Actividades/
@@ -116,4 +123,20 @@ public class ActividadController {
 		}
 	}
 
+ 	// POST: http://localhost:8080/Actividades/Alta/Mail
+ 	@PostMapping("/Alta/Mail")
+ 	public ResponseEntity<Void> enviarMail(@RequestBody ActividadMailHelper actividad) throws Exception {
+ 	
+ 		try {
+ 			
+ 			mailService.armarMailActividad(actividad);
+ 			
+ 			return ResponseEntity.ok(null);
+ 			
+ 		} catch (ResponseStatusException e) {
+ 	 		throw new Exception(e.getReason());
+ 	 	} catch (Exception e) {
+ 	 		throw new Exception("Error al enviar mail de solicitud de alta");
+ 	 	}
+ 	}
 }

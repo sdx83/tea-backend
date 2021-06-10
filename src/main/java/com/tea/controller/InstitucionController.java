@@ -2,21 +2,25 @@ package com.tea.controller;
 import java.util.List;
 import java.util.Optional;
 
-import com.tea.model.Actividad;
-import com.tea.model.Experiencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.tea.model.Experiencia;
 import com.tea.model.Institucion;
 import com.tea.model.InstructivoInstitucion;
+import com.tea.service.EmailServiceImpl;
 import com.tea.service.InstitucionServiceImpl;
+import com.tea.utils.InstitucionMailHelper;
+import com.tea.utils.ProfesionalMailHelper;
 
 import io.swagger.annotations.Api;
 
@@ -29,9 +33,12 @@ public class InstitucionController {
 
     private final InstitucionServiceImpl institucionService;
 
+    private final EmailServiceImpl mailService;
+    
     @Autowired
-	public InstitucionController(InstitucionServiceImpl institucionService) {
+	public InstitucionController(InstitucionServiceImpl institucionService, EmailServiceImpl mailService) {
 		this.institucionService = institucionService;
+		this.mailService = mailService;
 	}
 
 	// GET: http://localhost:8080/Instituciones/
@@ -121,4 +128,21 @@ public class InstitucionController {
 			throw new Exception("Error inesperado");
 		}
 	}
+	
+ 	// POST: http://localhost:8080/Instituciones/Alta/Mail
+ 	@PostMapping("/Alta/Mail")
+ 	public ResponseEntity<Void> enviarMail(@RequestBody InstitucionMailHelper institucion) throws Exception {
+ 	
+ 		try {
+ 			
+ 			mailService.armarMailInstitucion(institucion);
+ 			
+ 			return ResponseEntity.ok(null);
+ 			
+ 		} catch (ResponseStatusException e) {
+ 	 		throw new Exception(e.getReason());
+ 	 	} catch (Exception e) {
+ 	 		throw new Exception("Error al enviar mail de solicitud de alta");
+ 	 	}
+ 	}
 }
