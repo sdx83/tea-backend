@@ -1,13 +1,15 @@
 package com.tea.service;
 
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Date;
 import java.util.Properties;
 
+import javax.activation.DataHandler;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
+import javax.mail.Part;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -17,11 +19,9 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.tea.utils.ActividadMailHelper;
@@ -31,72 +31,66 @@ import com.tea.utils.ProfesionalMailHelper;
 @Service
 public class EmailServiceImpl implements EmailService{
 
-    @Autowired
-    private JavaMailSender javaMailSender;
+	 @Value("${spring.mail.username}")
+	 private String userMail;
+	 
+	 @Value("${spring.mail.password}")
+	 private String passwordMail;
+	 
+	 @Value("${spring.mail.host}")
+	 private String host;
+	 
+	 @Value("${spring.mail.port}")
+	 private int port;
+	 
+	 @Value("${spring.mail.properties.mail.smtp.auth}")
+	 private String auth;
+	 
+	 @Value("${spring.mail.properties.mail.smtp.starttls.enable}")
+	 private String starttls;
+	 
 
-    private static final String MAIL_CONSTANT="appteayuda@gmail.com";
-
-
-    public void sendOnly(String to, String subject, String text, Date date) throws MailException {
-
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        
-        simpleMailMessage.setTo(to);
-        simpleMailMessage.setFrom(MAIL_CONSTANT);
-        simpleMailMessage.setSubject(subject);
-        simpleMailMessage.setText(text);
-        //Aca le podemos mandar que fecha quiere mandarlo.
-        simpleMailMessage.setSentDate(date);
-
-        javaMailSender.send(simpleMailMessage);
-    }
-
-    public void sendMail(String to,String subject,Date date,String text) throws MailException{
-    	
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setTo(to);
-        simpleMailMessage.setFrom(MAIL_CONSTANT);
-        simpleMailMessage.setSubject(subject);
-        simpleMailMessage.setText(text);
-        simpleMailMessage.setSentDate(date);
-
-        javaMailSender.send(simpleMailMessage);
-
-    }
-    
-    public void sendmail(String mensaje) throws AddressException, MessagingException, IOException {
-    	   Properties props = new Properties();
-    	   props.put("mail.smtp.auth", "true");
-    	   props.put("mail.smtp.starttls.enable", "true");
-    	   props.put("mail.smtp.host", "smtp.gmail.com");
-    	   props.put("mail.smtp.port", "587");
+    public void sendmail(String to, String subject, String mensaje, Date date) throws AddressException, MessagingException, IOException {
     	   
-    	   Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+    	Properties mailProps = new Properties();
+    	
+    	mailProps.put("mail.smtp.auth", auth);
+    	mailProps.put("mail.smtp.starttls.enable", starttls);
+    	mailProps.put("mail.smtp.host", host);
+    	mailProps.put("mail.smtp.port", port);
+    	   
+    	Session session = Session.getInstance(mailProps, new javax.mail.Authenticator() {
     	      protected PasswordAuthentication getPasswordAuthentication() {
-    	         return new PasswordAuthentication(MAIL_CONSTANT, "AppTEA2021$");
+    	         return new PasswordAuthentication(userMail, passwordMail);
     	      }
     	   });
     	   
     	   Message msg = new MimeMessage(session);
-    	   msg.setFrom(new InternetAddress(MAIL_CONSTANT, false));
+    	   
+    	   msg.setFrom(new InternetAddress(userMail, false));
 
-    	   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(MAIL_CONSTANT));
-    	   msg.setSubject("Tutorials point email");
-    	   msg.setContent("Tutorials point email", "text/html");
+    	   msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userMail));
+    	   msg.setSubject(subject);
+    	   msg.setContent(subject, "text/html");
     	   msg.setSentDate(new Date());
 
     	   MimeBodyPart messageBodyPart = new MimeBodyPart();
     	   messageBodyPart.setContent(mensaje,"text/plain");
-    	   //messageBodyPart.setContent(mensaje, "text/html");
 
     	   Multipart multipart = new MimeMultipart();
     	   multipart.addBodyPart(messageBodyPart);
     	   MimeBodyPart attachPart = new MimeBodyPart();
-
-    	   attachPart.attachFile("/home/sgonzalez/Escritorio/TEAyudaLetrasAzules.png");
+    	   
+    	   URL url = new URL("https://i.ibb.co/2dtZvXn/logo.png");
+    	   
+    	   attachPart.attachFile(url.getFile());
+    	   
+    	   attachPart.setDataHandler(new DataHandler(url));
+    	   attachPart.setDisposition(Part.ATTACHMENT);
+    	   attachPart.setFileName(url.getFile());
+    	   
     	   multipart.addBodyPart(attachPart);
     	   msg.setContent(multipart);
-    	   
     	   
     	   Transport.send(msg);   
     	}
@@ -112,7 +106,7 @@ public class EmailServiceImpl implements EmailService{
         //System.out.println("Metodo que tampoco quiero implementar");
     }
     
-    public void armarMailProfesional(ProfesionalMailHelper profesional) {
+    public void armarMailProfesional(ProfesionalMailHelper profesional) throws AddressException, MessagingException, IOException {
     	
     	String mensaje = "A continuación se detallan los datos del profesional cargados por el solicitante para dar " +
     	                 "de alta en el sistema:\n\n" + 
@@ -130,7 +124,7 @@ public class EmailServiceImpl implements EmailService{
     					 "Observaciones: " + profesional.getObservaciones() + "\n\n\n" +
     					 "Mail generado automáticamente. El equipo de TEAyuda.";
     					 
-    	this.sendOnly("appteayuda@gmail.com", "Solicitud de alta de Profesional", mensaje, new Date());
+    	this.sendmail("appteayuda@gmail.com", "Solicitud de alta de Profesional", mensaje, new Date());
     }
     
     public void armarMailInstitucion(InstitucionMailHelper institucion) throws AddressException, MessagingException, IOException {
@@ -150,11 +144,10 @@ public class EmailServiceImpl implements EmailService{
     					 "Observaciones: " + institucion.getObservaciones() + "\n\n\n" +
     					 "Mail generado automáticamente. El equipo de TEAyuda.";
 
-    	this.sendmail(mensaje);
-    	//this.sendOnly("appteayuda@gmail.com", "Solicitud de alta de Institución", mensaje, new Date());
+    	this.sendmail("appteayuda@gmail.com", "Solicitud de alta de Institución", mensaje, new Date());
     }
     
-    public void armarMailActividad(ActividadMailHelper actividad) {
+    public void armarMailActividad(ActividadMailHelper actividad) throws AddressException, MessagingException, IOException {
     	
     	String mensaje = "A continuación se detallan los datos de la actividad cargados por el solicitante para dar " +
     	                 "de alta en el sistema:\n\n" + 
@@ -171,6 +164,6 @@ public class EmailServiceImpl implements EmailService{
     					 "Observaciones: " + actividad.getObservaciones() + "\n\n\n" +
     					 "Mail generado automáticamente. El equipo de TEAyuda.";
     					 
-    	this.sendOnly("appteayuda@gmail.com", "Solicitud de alta de Actividad", mensaje, new Date());
+    	this.sendmail("appteayuda@gmail.com", "Solicitud de alta de Actividad", mensaje, new Date());
     }
 }

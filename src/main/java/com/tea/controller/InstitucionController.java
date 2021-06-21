@@ -20,7 +20,6 @@ import com.tea.model.InstructivoInstitucion;
 import com.tea.service.EmailServiceImpl;
 import com.tea.service.InstitucionServiceImpl;
 import com.tea.utils.InstitucionMailHelper;
-import com.tea.utils.ProfesionalMailHelper;
 
 import io.swagger.annotations.Api;
 
