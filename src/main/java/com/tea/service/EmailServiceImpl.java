@@ -50,7 +50,7 @@ public class EmailServiceImpl implements EmailService{
 	 private String starttls;
 	 
 
-    public void sendmail(String to, String subject, String mensaje, Date date) throws AddressException, MessagingException, IOException {
+    public void sendmail(String subject, String mensaje, Date date) throws AddressException, MessagingException, IOException {
     	   
     	Properties mailProps = new Properties();
     	
@@ -124,7 +124,7 @@ public class EmailServiceImpl implements EmailService{
     					 "Observaciones: " + profesional.getObservaciones() + "\n\n\n" +
     					 "Mail generado automáticamente. El equipo de TEAyuda.";
     					 
-    	this.sendmail("appteayuda@gmail.com", "Solicitud de alta de Profesional", mensaje, new Date());
+    	this.sendmail("Solicitud de alta de Profesional", mensaje, new Date());
     }
     
     public void armarMailInstitucion(InstitucionMailHelper institucion) throws AddressException, MessagingException, IOException {
@@ -144,7 +144,7 @@ public class EmailServiceImpl implements EmailService{
     					 "Observaciones: " + institucion.getObservaciones() + "\n\n\n" +
     					 "Mail generado automáticamente. El equipo de TEAyuda.";
 
-    	this.sendmail("appteayuda@gmail.com", "Solicitud de alta de Institución", mensaje, new Date());
+    	this.sendmail("Solicitud de alta de Institución", mensaje, new Date());
     }
     
     public void armarMailActividad(ActividadMailHelper actividad) throws AddressException, MessagingException, IOException {
@@ -164,6 +164,6 @@ public class EmailServiceImpl implements EmailService{
     					 "Observaciones: " + actividad.getObservaciones() + "\n\n\n" +
     					 "Mail generado automáticamente. El equipo de TEAyuda.";
     					 
-    	this.sendmail("appteayuda@gmail.com", "Solicitud de alta de Actividad", mensaje, new Date());
+    	this.sendmail("Solicitud de alta de Actividad", mensaje, new Date());
     }
 }
