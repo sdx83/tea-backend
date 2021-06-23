@@ -63,6 +63,11 @@ public class ProfesionalServiceImpl implements ProfesionalService {
 		return profesional;
 	}
 
+	@Override
+	public void save(Profesional profesional) {
+		this.profesionalDAO.save(profesional);
+	}
+
 	private Sort sortByValoracionDesc() {
 		return Sort.by(Sort.Direction.DESC, "valoracionPromedio");
 	}

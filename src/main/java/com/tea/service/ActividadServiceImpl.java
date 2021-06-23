@@ -61,4 +61,9 @@ public class ActividadServiceImpl implements ActividadService {
 		Optional<Actividad> actividad = actividadDAO.findById(id);
 		return actividad;
 	}
+
+	@Override
+	public void save(Actividad actividad) {
+		actividadDAO.save(actividad);
+	}
 }

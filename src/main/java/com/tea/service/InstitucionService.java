@@ -16,4 +16,5 @@ public interface InstitucionService {
 	
 	Optional<Institucion> findById(Long id);
 
+    void save(Institucion institucion);
 }

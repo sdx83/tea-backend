@@ -16,4 +16,6 @@ public interface ProfesionalService {
 	
 	Optional<Profesional> findById(Long id);
 
+	void save(Profesional profesional);
+
 }
