@@ -66,4 +66,9 @@ public class InstitucionServiceImpl implements InstitucionService {
 		return institucion;
 	}
 
+	@Override
+	public void save(Institucion institucion) {
+		institucionDAO.save(institucion);
+	}
+
 }

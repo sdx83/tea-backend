@@ -15,4 +15,6 @@ public interface ActividadService {
     List<InstructivoActividad> findInstructivo(Actividad actividad);
 	
 	Optional<Actividad> findById(Long id);
+
+    void save(Actividad actividad);
 }
