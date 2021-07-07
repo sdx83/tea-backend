@@ -35,6 +35,9 @@ public class Experiencia implements Serializable {
 
 	@Column()
 	private int puntaje;
+
+	@Column( )
+	private String nickname;
 	
 	@Transient
 	private String tipoExperiencia;
