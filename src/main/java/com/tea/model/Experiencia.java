@@ -139,4 +139,11 @@ public class Experiencia implements Serializable {
 		return tipoExp;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 }

@@ -34,7 +34,6 @@ public class ExperienciaServiceImpl implements ExperienciaService {
 	
 	@Override
 	public Experiencia save(Experiencia exp) {
-		
 		return experienciaDAO.save(exp);
 	}
 	
