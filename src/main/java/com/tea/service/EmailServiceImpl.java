@@ -81,8 +81,9 @@ public class EmailServiceImpl implements EmailService{
     	   multipart.addBodyPart(messageBodyPart);
     	   MimeBodyPart attachPart = new MimeBodyPart();
     	   
-    	   URL url = new URL("https://i.ibb.co/2dtZvXn/logo.png");
-    	   
+    	   //URL url = new URL("https://i.ibb.co/2dtZvXn/logo.png");
+	   URL url = new URL("https://i.ibb.co/fG9NHDD/logo.png");
+	    
     	   attachPart.attachFile(url.getFile());
     	   
     	   attachPart.setDataHandler(new DataHandler(url));
